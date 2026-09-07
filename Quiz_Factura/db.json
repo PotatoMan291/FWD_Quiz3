@@ -1,3 +1,40 @@
 {
-  "invoices": []
+  "invoices": [
+    {
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3101123456"
+      },
+      "client": {
+        "name": "Juan Pérez",
+        "email": "juan@email.com",
+        "address": "San José"
+      },
+      "invoiceNumber": "FAC-001",
+      "issueDate": "2026-09-04",
+      "taxRate": 13,
+      "items": [
+        {
+          "id": "73c7c098-b007-4ea1-a6fa-ab9cbfebd92d",
+          "description": "Teclado",
+          "quantity": 2,
+          "unitPrice": 25
+        },
+        {
+          "id": "fe1ce683-c2fd-46a8-a634-95bb63f870a9",
+          "description": "Monitor",
+          "quantity": 1,
+          "unitPrice": 125
+        },
+        {
+          "id": "fa880d99-6b65-41c9-98c4-a8326c5ed4d4",
+          "description": "Mouse",
+          "quantity": 3,
+          "unitPrice": 12
+        }
+      ],
+      "id": "i-9xO-cdirk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
