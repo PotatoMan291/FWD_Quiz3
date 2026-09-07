@@ -16,7 +16,3 @@ export const calculateTax = (subtotal, taxRate) => {
 export const calculateTotal = (subtotal, tax) => {
   return subtotal + tax;
 };
-
-const subtotal = calculateSubtotal(invoice.items);
-const tax = calculateTax(subtotal, invoice.taxRate);
-const total = calculateTotal(subtotal, tax);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import InvoiceForm from "./components/InvoiceForm";
+import InvoiceList from "./components/InvoiceList";
 
 import {
   createInvoice,
@@ -28,6 +29,10 @@ function App() {
       const data = await getInvoices();
 
       setInvoices(data);
+
+      if (data.length > 0) {
+        setSelectedInvoice(data[0]);
+      }
     } catch (error) {
       console.error(error);
 
@@ -79,29 +84,21 @@ function App() {
           </div>
         )}
 
-        <InvoiceForm onCreateInvoice={handleCreateInvoice} />
+        <InvoiceForm
+          onCreateInvoice={handleCreateInvoice}
+        />
 
-        <section className="temporary-invoice-info">
-          <h2>Facturas registradas</h2>
-
-          {loading ? (
+        {loading ? (
+          <section className="loading-section">
             <p>Cargando facturas...</p>
-          ) : invoices.length === 0 ? (
-            <p>No hay facturas registradas.</p>
-          ) : (
-            <p>
-              Actualmente hay {invoices.length} factura(s)
-              registrada(s).
-            </p>
-          )}
-
-          {selectedInvoice && (
-            <p>
-              Última factura seleccionada:{" "}
-              <strong>{selectedInvoice.invoiceNumber}</strong>
-            </p>
-          )}
-        </section>
+          </section>
+        ) : (
+          <InvoiceList
+            invoices={invoices}
+            selectedInvoice={selectedInvoice}
+            onSelectInvoice={setSelectedInvoice}
+          />
+        )}
       </main>
     </div>
   );
