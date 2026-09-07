@@ -1,36 +1,260 @@
 {
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "name": "Administrador"
+    }
+  ],
   "invoices": [
     {
+      "id": "1",
       "issuer": {
         "name": "TechStore S.A.",
-        "taxId": "3101123456"
+        "taxId": "3-101-123456"
       },
       "client": {
-        "name": "Juan Pérez",
-        "email": "juan@email.com",
-        "address": "San José"
+        "name": "Café Central S.A.",
+        "email": "compras@cafecentral.cr",
+        "address": "San José, Costa Rica"
       },
       "invoiceNumber": "FAC-001",
-      "issueDate": "2026-09-04",
-      "dueDate": "2026-09-17",
-      "taxRate": 13,
+      "issueDate": "2026-05-05",
+      "dueDate": "2026-05-20",
+      "taxRate": 0,
       "paid": true,
       "items": [
         {
-          "id": "ce98fd48-1e15-4d08-8ae0-30dea96297e8",
-          "description": "monitor",
+          "id": "item-001",
+          "description": "Teclado mecánico",
+          "quantity": 2,
+          "unitPrice": 50
+        },
+        {
+          "id": "item-002",
+          "description": "Mouse inalámbrico",
+          "quantity": 2,
+          "unitPrice": 40
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3-101-123456"
+      },
+      "client": {
+        "name": "Soluciones Ticas S.R.L.",
+        "email": "administracion@solucionesticas.cr",
+        "address": "Heredia, Costa Rica"
+      },
+      "invoiceNumber": "FAC-002",
+      "issueDate": "2026-05-18",
+      "dueDate": "2026-06-02",
+      "taxRate": 0,
+      "paid": true,
+      "items": [
+        {
+          "id": "item-003",
+          "description": "Monitor LED",
+          "quantity": 1,
+          "unitPrice": 160
+        },
+        {
+          "id": "item-004",
+          "description": "Cable HDMI",
+          "quantity": 2,
+          "unitPrice": 25
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3-101-123456"
+      },
+      "client": {
+        "name": "Grupo Horizonte S.A.",
+        "email": "contabilidad@horizonte.cr",
+        "address": "Alajuela, Costa Rica"
+      },
+      "invoiceNumber": "FAC-003",
+      "issueDate": "2026-06-08",
+      "dueDate": "2026-06-23",
+      "taxRate": 0,
+      "paid": true,
+      "items": [
+        {
+          "id": "item-005",
+          "description": "Disco SSD 1TB",
+          "quantity": 1,
+          "unitPrice": 125
+        },
+        {
+          "id": "item-006",
+          "description": "Memoria USB 128GB",
+          "quantity": 2,
+          "unitPrice": 35
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3-101-123456"
+      },
+      "client": {
+        "name": "Corporación Delta S.A.",
+        "email": "compras@delta.cr",
+        "address": "San José, Costa Rica"
+      },
+      "invoiceNumber": "FAC-004",
+      "issueDate": "2026-06-20",
+      "dueDate": "2026-07-05",
+      "taxRate": 0,
+      "paid": true,
+      "items": [
+        {
+          "id": "item-007",
+          "description": "Computadora de escritorio",
+          "quantity": 5,
+          "unitPrice": 400
+        },
+        {
+          "id": "item-008",
+          "description": "Monitor profesional",
+          "quantity": 3,
+          "unitPrice": 150
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3-101-123456"
+      },
+      "client": {
+        "name": "Café Central S.A.",
+        "email": "compras@cafecentral.cr",
+        "address": "San José, Costa Rica"
+      },
+      "invoiceNumber": "FAC-005",
+      "issueDate": "2026-07-07",
+      "dueDate": "2026-07-22",
+      "taxRate": 0,
+      "paid": true,
+      "items": [
+        {
+          "id": "item-009",
+          "description": "Router empresarial",
+          "quantity": 1,
+          "unitPrice": 140
+        },
+        {
+          "id": "item-010",
+          "description": "Switch de red",
+          "quantity": 1,
+          "unitPrice": 80
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3-101-123456"
+      },
+      "client": {
+        "name": "Soluciones Ticas S.R.L.",
+        "email": "administracion@solucionesticas.cr",
+        "address": "Heredia, Costa Rica"
+      },
+      "invoiceNumber": "FAC-006",
+      "issueDate": "2026-08-01",
+      "dueDate": "2026-08-16",
+      "taxRate": 0,
+      "paid": false,
+      "items": [
+        {
+          "id": "item-011",
+          "description": "Webcam HD",
+          "quantity": 1,
+          "unitPrice": 75
+        },
+        {
+          "id": "item-012",
+          "description": "Audífonos USB",
+          "quantity": 2,
+          "unitPrice": 50
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3-101-123456"
+      },
+      "client": {
+        "name": "Grupo Horizonte S.A.",
+        "email": "contabilidad@horizonte.cr",
+        "address": "Alajuela, Costa Rica"
+      },
+      "invoiceNumber": "FAC-007",
+      "issueDate": "2026-08-12",
+      "dueDate": "2026-08-27",
+      "taxRate": 0,
+      "paid": false,
+      "items": [
+        {
+          "id": "item-013",
+          "description": "Impresora multifuncional",
+          "quantity": 1,
+          "unitPrice": 165
+        },
+        {
+          "id": "item-014",
+          "description": "Resma de papel",
+          "quantity": 2,
+          "unitPrice": 20
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3-101-123456"
+      },
+      "client": {
+        "name": "Café Central S.A.",
+        "email": "compras@cafecentral.cr",
+        "address": "San José, Costa Rica"
+      },
+      "invoiceNumber": "FAC-008",
+      "issueDate": "2026-09-01",
+      "dueDate": "2026-09-30",
+      "taxRate": 0,
+      "paid": false,
+      "items": [
+        {
+          "id": "item-015",
+          "description": "UPS",
           "quantity": 1,
           "unitPrice": 120
         },
         {
-          "id": "9ceecc96-aec1-47e1-ae04-535cae285773",
-          "description": "mouse",
-          "quantity": 3,
-          "unitPrice": 50
+          "id": "item-016",
+          "description": "Regleta protectora",
+          "quantity": 2,
+          "unitPrice": 35
         }
-      ],
-      "id": "j7CExl1smqA"
+      ]
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }

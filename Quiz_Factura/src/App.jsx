@@ -9,9 +9,12 @@ import {
 } from "react-router-dom";
 
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import BillingPage from "./pages/BillingPage";
 import DashboardPage from "./pages/DashboardPage";
 import InvoicePage from "./pages/InvoicePage";
+import LoginPage from "./pages/LoginPage";
 
 import {
   createInvoice,
@@ -117,41 +120,64 @@ function App() {
       )}
 
       <Routes>
-        <Route element={<Layout />}>
-          <Route
-            path="/"
-            element={
-              <BillingPage
-                invoices={invoices}
-                loading={loading}
-                onCreateInvoice={
-                  handleCreateInvoice
-                }
-              />
-            }
-          />
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
 
+        <Route
+          element={
+            <ProtectedRoute />
+          }
+        >
           <Route
-            path="/invoice/:id"
-            element={
-              <InvoicePage
-                invoices={invoices}
-                loading={loading}
-                onMarkAsPaid={
-                  handleMarkAsPaid
-                }
-              />
-            }
-          />
+            element={<Layout />}
+          >
+            <Route
+              path="/"
+              element={
+                <BillingPage
+                  invoices={
+                    invoices
+                  }
+                  loading={
+                    loading
+                  }
+                  onCreateInvoice={
+                    handleCreateInvoice
+                  }
+                />
+              }
+            />
 
-          <Route
-            path="/dashboard"
-            element={
-              <DashboardPage
-                invoices={invoices}
-              />
-            }
-          />
+            <Route
+              path="/invoice/:id"
+              element={
+                <InvoicePage
+                  invoices={
+                    invoices
+                  }
+                  loading={
+                    loading
+                  }
+                  onMarkAsPaid={
+                    handleMarkAsPaid
+                  }
+                />
+              }
+            />
+
+            <Route
+              path="/dashboard"
+              element={
+                <DashboardPage
+                  invoices={
+                    invoices
+                  }
+                />
+              }
+            />
+          </Route>
         </Route>
       </Routes>
     </>
