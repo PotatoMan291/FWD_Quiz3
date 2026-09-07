@@ -1,17 +1,57 @@
 :root {
+  color-scheme: light;
+
   --primary: #625bf6;
   --primary-dark: #4f46e5;
+
   --surface: #ffffff;
   --surface-soft: #f8f8fb;
   --background: #f3f4f8;
+
   --border: #e2e4ec;
+
   --text: #20232d;
   --muted: #6f7280;
+
+  --input-background: #ffffff;
+
   --danger: #dc3545;
   --success: #1f9254;
   --warning: #bb7700;
+
+  --primary-soft: #eeedff;
+
   --shadow:
-    0 14px 40px rgba(25, 28, 45, 0.06);
+    0 14px 40px
+    rgba(25, 28, 45, 0.06);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --primary: #8b85ff;
+  --primary-dark: #746df8;
+
+  --surface: #191b22;
+  --surface-soft: #20232c;
+  --background: #111218;
+
+  --border: #30333d;
+
+  --text: #f0f1f5;
+  --muted: #a3a6b2;
+
+  --input-background: #15171e;
+
+  --danger: #ff7a85;
+  --success: #5bd59a;
+  --warning: #ffc35c;
+
+  --primary-soft: #292746;
+
+  --shadow:
+    0 14px 40px
+    rgba(0, 0, 0, 0.22);
 }
 
 .app {
@@ -24,9 +64,12 @@
   top: 0;
   z-index: 50;
 
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .navbar {
@@ -70,7 +113,7 @@
 .nav-link:hover,
 .nav-link.active {
   color: var(--primary);
-  background: #eeedff;
+  background: var(--primary-soft);
 }
 
 .app-content {
@@ -207,16 +250,17 @@
 
   padding: 0 13px;
 
-  border: 1px solid #d7d9e2;
+  border: 1px solid var(--border);
   border-radius: 9px;
   outline: none;
 
-  background: #fff;
+  background: var(--input-background);
   color: var(--text);
 
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background-color 0.25s ease;
 }
 
 .form-group input:focus {
@@ -315,18 +359,18 @@
 
 .button-secondary {
   border-color: var(--border);
-  background: white;
-  color: #4e5060;
+  background: var(--surface);
+  color: var(--text);
 }
 
 .button-secondary:hover {
-  border-color: #c3c5d0;
-  background: #fafafe;
+  border-color: var(--primary);
+  background: var(--surface-soft);
 }
 
 .button-danger {
-  border-color: #f1c8cc;
-  background: #fff;
+  border-color: var(--border);
+  background: var(--surface);
   color: var(--danger);
 }
 
@@ -933,7 +977,7 @@
       rgba(79, 70, 229, 0.1),
       transparent 35%
     ),
-    #f4f5f9;
+    var(--background);
 }
 
 .login-card {
@@ -941,14 +985,12 @@
 
   padding: 38px;
 
-  background: white;
+  background: var(--surface);
 
   border: 1px solid var(--border);
   border-radius: 22px;
 
-  box-shadow:
-    0 25px 70px
-    rgba(30, 32, 55, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .login-brand {
@@ -1050,4 +1092,51 @@
   .login-brand h1 {
     font-size: 1.9rem;
   }
+}
+
+.theme-toggle {
+  width: 39px;
+  height: 39px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: var(--surface-soft);
+  color: var(--text);
+
+  font-size: 1.25rem;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
+:root[data-theme="dark"] .recharts-cartesian-axis-tick-value,
+:root[data-theme="dark"] .recharts-legend-item-text {
+  fill: var(--muted) !important;
+  color: var(--muted) !important;
+}
+
+:root[data-theme="dark"] .recharts-cartesian-grid line {
+  stroke: var(--border);
+}
+
+:root[data-theme="dark"] .recharts-default-tooltip {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
 }

@@ -255,6 +255,38 @@
           "unitPrice": 35
         }
       ]
+    },
+    {
+      "issuer": {
+        "name": "TechStore S.A.",
+        "taxId": "3101123456"
+      },
+      "client": {
+        "name": "Juan Pérez",
+        "email": "juan@email.com",
+        "address": "San José"
+      },
+      "invoiceNumber": "FAC-101",
+      "issueDate": "2026-09-04",
+      "dueDate": "2026-09-16",
+      "taxRate": 13,
+      "paid": false,
+      "items": [
+        {
+          "id": "ca7ced2b-9537-4ef5-a807-c8602bb0d26b",
+          "description": "monitor",
+          "quantity": 1,
+          "unitPrice": 20
+        },
+        {
+          "id": "4d9960e8-58ce-4c5c-9b15-18865ee8ef5e",
+          "description": "mouse",
+          "quantity": 3,
+          "unitPrice": 50
+        }
+      ],
+      "id": "FiPqzbcCBO8"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
