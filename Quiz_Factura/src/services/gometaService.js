@@ -1,0 +1,1 @@
+// Aquí agregaremos posteriormente las consultas a la API GoMeta.
