@@ -1,21 +1,35 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
-import InvoiceForm from "./components/InvoiceForm";
-import InvoiceList from "./components/InvoiceList";
+import {
+  Route,
+  Routes,
+} from "react-router-dom";
+
+import Layout from "./components/Layout";
+import BillingPage from "./pages/BillingPage";
+import DashboardPage from "./pages/DashboardPage";
+import InvoicePage from "./pages/InvoicePage";
 
 import {
   createInvoice,
   getInvoices,
+  updateInvoice,
 } from "./services/invoiceService";
 
 import "./App.css";
 
 function App() {
-  const [invoices, setInvoices] = useState([]);
-  const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const [invoices, setInvoices] =
+    useState([]);
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [loading, setLoading] =
+    useState(true);
+
+  const [error, setError] =
+    useState("");
 
   useEffect(() => {
     loadInvoices();
@@ -26,15 +40,12 @@ function App() {
       setLoading(true);
       setError("");
 
-      const data = await getInvoices();
+      const data =
+        await getInvoices();
 
       setInvoices(data);
-
-      if (data.length > 0) {
-        setSelectedInvoice(data[0]);
-      }
-    } catch (error) {
-      console.error(error);
+    } catch (requestError) {
+      console.error(requestError);
 
       setError(
         "No se pudieron cargar las facturas. Verifica que JSON Server esté ejecutándose.",
@@ -44,63 +55,106 @@ function App() {
     }
   };
 
-  const handleCreateInvoice = async (invoice) => {
-    try {
-      setError("");
+  const handleCreateInvoice =
+    async (invoice) => {
+      try {
+        setError("");
 
-      const savedInvoice = await createInvoice(invoice);
+        const savedInvoice =
+          await createInvoice(invoice);
 
-      setInvoices((previousInvoices) => [
-        ...previousInvoices,
-        savedInvoice,
-      ]);
+        setInvoices(
+          (previousInvoices) => [
+            ...previousInvoices,
+            savedInvoice,
+          ],
+        );
 
-      setSelectedInvoice(savedInvoice);
-    } catch (error) {
-      console.error(error);
+        return true;
+      } catch (requestError) {
+        console.error(requestError);
 
-      setError(
-        "No se pudo guardar la factura. Verifica que JSON Server esté ejecutándose.",
-      );
-    }
-  };
+        setError(
+          "No se pudo guardar la factura.",
+        );
+
+        return false;
+      }
+    };
+
+  const handleMarkAsPaid =
+    async (id) => {
+      try {
+        const updatedInvoice =
+          await updateInvoice(id, {
+            paid: true,
+          });
+
+        setInvoices(
+          (previousInvoices) =>
+            previousInvoices.map(
+              (invoice) =>
+                invoice.id === id
+                  ? updatedInvoice
+                  : invoice,
+            ),
+        );
+      } catch (requestError) {
+        console.error(requestError);
+
+        setError(
+          "No se pudo actualizar el estado de la factura.",
+        );
+      }
+    };
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <div>
-          <h1>Sistema de Facturación</h1>
-
-          <p>
-            Creación y administración de facturas
-          </p>
+    <>
+      {error && (
+        <div className="global-error">
+          {error}
         </div>
-      </header>
+      )}
 
-      <main className="app-content">
-        {error && (
-          <div className="global-error">
-            {error}
-          </div>
-        )}
-
-        <InvoiceForm
-          onCreateInvoice={handleCreateInvoice}
-        />
-
-        {loading ? (
-          <section className="loading-section">
-            <p>Cargando facturas...</p>
-          </section>
-        ) : (
-          <InvoiceList
-            invoices={invoices}
-            selectedInvoice={selectedInvoice}
-            onSelectInvoice={setSelectedInvoice}
+      <Routes>
+        <Route element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <BillingPage
+                invoices={invoices}
+                loading={loading}
+                onCreateInvoice={
+                  handleCreateInvoice
+                }
+              />
+            }
           />
-        )}
-      </main>
-    </div>
+
+          <Route
+            path="/invoice/:id"
+            element={
+              <InvoicePage
+                invoices={invoices}
+                loading={loading}
+                onMarkAsPaid={
+                  handleMarkAsPaid
+                }
+              />
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <DashboardPage
+                invoices={invoices}
+              />
+            }
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

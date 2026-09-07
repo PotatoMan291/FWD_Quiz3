@@ -1,25 +1,22 @@
+import { Link } from "react-router-dom";
+
 import {
-  calculateSubtotal,
-  calculateTax,
-  calculateTotal,
+  formatCurrency,
+  formatDate,
+  getInvoiceStatus,
+  getInvoiceTotal,
 } from "../utils/invoiceCalculations";
 
-function InvoiceList({ invoices, selectedInvoice, onSelectInvoice }) {
+function InvoiceList({ invoices }) {
   if (invoices.length === 0) {
     return (
-      <section className="invoice-list-section">
-        <div className="section-heading">
-          <div>
-            <p className="section-eyebrow">Historial</p>
-            <h2>Facturas registradas</h2>
-          </div>
-        </div>
-
+      <section className="panel">
         <div className="empty-state">
-          <h3>No hay facturas registradas</h3>
+          <h2>No hay facturas registradas</h2>
 
           <p>
-            Las facturas que crees desde el formulario aparecerán aquí.
+            Crea una factura desde el formulario
+            para comenzar.
           </p>
         </div>
       </section>
@@ -27,69 +24,79 @@ function InvoiceList({ invoices, selectedInvoice, onSelectInvoice }) {
   }
 
   return (
-    <section className="invoice-list-section">
+    <section className="panel">
       <div className="section-heading">
         <div>
-          <p className="section-eyebrow">Historial</p>
+          <span className="eyebrow">
+            Historial
+          </span>
+
           <h2>Facturas registradas</h2>
         </div>
 
-        <span className="invoice-count">
-          {invoices.length} factura{invoices.length !== 1 ? "s" : ""}
+        <span className="count-badge">
+          {invoices.length}
         </span>
       </div>
 
       <div className="invoice-list">
         {invoices.map((invoice) => {
-          const subtotal = calculateSubtotal(invoice.items);
+          const total =
+            getInvoiceTotal(invoice);
 
-          const tax = calculateTax(
-            subtotal,
-            invoice.taxRate,
-          );
-
-          const total = calculateTotal(
-            subtotal,
-            tax,
-          );
-
-          const isSelected =
-            selectedInvoice?.id === invoice.id;
+          const status =
+            getInvoiceStatus(invoice);
 
           return (
-            <button
+            <article
+              className="invoice-list-item"
               key={invoice.id}
-              type="button"
-              className={`invoice-list-item ${
-                isSelected ? "selected" : ""
-              }`}
-              onClick={() => onSelectInvoice(invoice)}
             >
-              <div className="invoice-list-main">
-                <div>
-                  <span className="invoice-number">
-                    {invoice.invoiceNumber}
+              <div>
+                <span className="invoice-number">
+                  {invoice.invoiceNumber}
+                </span>
+
+                <h3>
+                  {invoice.client?.name}
+                </h3>
+
+                <div className="invoice-meta">
+                  <span>
+                    Emisión:{" "}
+                    {formatDate(
+                      invoice.issueDate,
+                    )}
                   </span>
 
-                  <h3>{invoice.client.name}</h3>
+                  <span>
+                    Vence:{" "}
+                    {formatDate(
+                      invoice.dueDate,
+                    )}
+                  </span>
                 </div>
-
-                <span className="invoice-total">
-                  ${total.toFixed(2)}
-                </span>
               </div>
 
-              <div className="invoice-list-meta">
-                <span>
-                  Fecha: {invoice.issueDate}
+              <div className="invoice-list-actions">
+                <strong>
+                  {formatCurrency(total)}
+                </strong>
+
+                <span
+                  className={`status status-${status.toLowerCase()}`}
+                >
+                  {status}
                 </span>
 
-                <span>
-                  {invoice.items.length} producto
-                  {invoice.items.length !== 1 ? "s" : ""}
-                </span>
+                <Link
+                  className="button button-secondary"
+                  to={`/invoice/${invoice.id}`}
+                >
+                  Ver factura
+                </Link>
               </div>
-            </button>
+            </article>
           );
         })}
       </div>

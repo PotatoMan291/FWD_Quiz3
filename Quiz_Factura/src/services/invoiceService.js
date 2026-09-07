@@ -4,7 +4,9 @@ export const getInvoices = async () => {
   const response = await fetch(API_URL);
 
   if (!response.ok) {
-    throw new Error("No se pudieron obtener las facturas.");
+    throw new Error(
+      "No se pudieron obtener las facturas.",
+    );
   }
 
   return response.json();
@@ -13,14 +15,41 @@ export const getInvoices = async () => {
 export const createInvoice = async (invoice) => {
   const response = await fetch(API_URL, {
     method: "POST",
+
     headers: {
       "Content-Type": "application/json",
     },
+
     body: JSON.stringify(invoice),
   });
 
   if (!response.ok) {
-    throw new Error("No se pudo guardar la factura.");
+    throw new Error(
+      "No se pudo guardar la factura.",
+    );
+  }
+
+  return response.json();
+};
+
+export const updateInvoice = async (
+  id,
+  changes,
+) => {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "PATCH",
+
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(changes),
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      "No se pudo actualizar la factura.",
+    );
   }
 
   return response.json();

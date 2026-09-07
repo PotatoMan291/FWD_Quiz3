@@ -12,28 +12,24 @@
       },
       "invoiceNumber": "FAC-001",
       "issueDate": "2026-09-04",
+      "dueDate": "2026-09-17",
       "taxRate": 13,
+      "paid": true,
       "items": [
         {
-          "id": "73c7c098-b007-4ea1-a6fa-ab9cbfebd92d",
-          "description": "Teclado",
-          "quantity": 2,
-          "unitPrice": 25
-        },
-        {
-          "id": "fe1ce683-c2fd-46a8-a634-95bb63f870a9",
-          "description": "Monitor",
+          "id": "ce98fd48-1e15-4d08-8ae0-30dea96297e8",
+          "description": "monitor",
           "quantity": 1,
-          "unitPrice": 125
+          "unitPrice": 120
         },
         {
-          "id": "fa880d99-6b65-41c9-98c4-a8326c5ed4d4",
-          "description": "Mouse",
+          "id": "9ceecc96-aec1-47e1-ae04-535cae285773",
+          "description": "mouse",
           "quantity": 3,
-          "unitPrice": 12
+          "unitPrice": 50
         }
       ],
-      "id": "i-9xO-cdirk"
+      "id": "j7CExl1smqA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
